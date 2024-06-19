@@ -122,7 +122,7 @@ let attemptedInjection = false;
 
     log("StateFarm: running (after function)");
     //script info
-    const name = "ЅtateFarm Client";
+    const name = "HellFarm Client";
     const version = typeof (GM_info) !== 'undefined' ? GM_info.script.version : "3";
     const menuTitle = name + " v" + version;
     //INIT WEBSITE LINKS: store them here so they are easy to maintain and update!

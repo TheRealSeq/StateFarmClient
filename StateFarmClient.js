@@ -818,8 +818,8 @@ But check out the GitHub guide.`},
                 initModule({ location: tp.audioFolder, title: "CustomSFX (2nd)", storeAs: "customSFX2", bindLocation: tp.themingTab.pages[1], enableConditions: [["muteGame", false]], dropdown: JSON.parse(JSON.stringify(retrievedSFX)), });
                 initModule({ location: tp.audioFolder, title: "CustomSFX (3rd)", storeAs: "customSFX3", bindLocation: tp.themingTab.pages[1], enableConditions: [["muteGame", false]], dropdown: JSON.parse(JSON.stringify(retrievedSFX)), });
             tp.themingTab.pages[0].addSeparator();
-            initModule({ location: tp.themingTab.pages[0], title: "Replace Logo", storeAs: "replaceLogo", bindLocation: tp.themingTab.pages[1], });
-            initModule({ location: tp.themingTab.pages[0], title: "Animate Title", storeAs: "titleAnimation", bindLocation: tp.themingTab.pages[1], });
+            //initModule({ location: tp.themingTab.pages[0], title: "Replace Logo", storeAs: "replaceLogo", bindLocation: tp.themingTab.pages[1], });
+            //initModule({ location: tp.themingTab.pages[0], title: "Animate Title", storeAs: "titleAnimation", bindLocation: tp.themingTab.pages[1], });
             initModule({ location: tp.themingTab.pages[0], title: "Client Theme", storeAs: "themeType", bindLocation: tp.themingTab.pages[1], dropdown: [
                 {text: "Default", value: "defaultTheme"},
                 {text: "Iceberg", value: "icebergTheme"},
@@ -1158,18 +1158,6 @@ debug mode).`},
                 })();
             },}); //but yes, as you can see "macros" are just scripts you can execute for whatever purposes you need. reminds me of userscripts...
             initModule({ location: tp.miscTab.pages[0], title: "Do At Startup", storeAs: "autoMacro", bindLocation: tp.miscTab.pages[1],});
-            tp.miscTab.pages[0].addSeparator();
-            initModule({ location: tp.miscTab.pages[0], title: "[WIP]RandomPath", storeAs: "randomPath", bindLocation: tp.miscTab.pages[1], button: "Random Path", clickFunction: function(){
-                findNewPath = true;
-            },});
-            findNewPath = false;
-            tp.miscTab.pages[0].addSeparator();
-            initModule({ location: tp.miscTab.pages[0], title: "SilentRoll", storeAs: "silentRoll", bindLocation: tp.miscTab.pages[1], });
-            initFolder({ location: tp.miscTab.pages[0], title: "Seizure Options", storeAs: "seizureFolder", });
-                initModule({ location: tp.seizureFolder, title: "SeizureX", storeAs: "enableSeizureX", bindLocation: tp.miscTab.pages[1], });
-                initModule({ location: tp.seizureFolder, title: "X Amount", storeAs: "amountSeizureX", slider: { min: -6.283185307179586, max: 6.283185307179586, step: Math.PI / 280 }, defaultValue: 2, });
-                initModule({ location: tp.seizureFolder, title: "SeizureY", storeAs: "enableSeizureY", bindLocation: tp.miscTab.pages[1], });
-                initModule({ location: tp.seizureFolder, title: "Y Amount", storeAs: "amountSeizureY", slider: { min: -6.283185307179586, max: 6.283185307179586, step: Math.PI / 280 }, defaultValue: 2, });
         //CLIENT MODULES
         initFolder({ location: tp.mainPanel, title: "Client & About", storeAs: "clientFolder", });
         initTabs({ location: tp.clientFolder, storeAs: "clientTab" }, [

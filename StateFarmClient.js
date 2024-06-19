@@ -702,56 +702,17 @@ let attemptedInjection = false;
             initModule({ location: tp.chatTab.pages[0], title: "AntiAFK", storeAs: "antiAFK", bindLocation: tp.chatTab.pages[1], });
             initFolder({ location: tp.chatTab.pages[0], title: "Trolling", storeAs: "trollingFolder", });
                 initModule({ location: tp.trollingFolder, title: "Mock", storeAs: "mockMode", bindLocation: tp.chatTab.pages[1], });
-                initModule({ location: tp.trollingFolder, title: "Announcer", storeAs: "announcer", bindLocation: tp.chatTab.pages[1], });
-                tp.trollingFolder.addSeparator();
-                initModule({ location: tp.trollingFolder, title: "AutoEZ", storeAs: "autoEZ", bindLocation: tp.chatTab.pages[1], });
-                initModule({ location: tp.trollingFolder, title: "CheatAccuse", storeAs: "cheatAccuse", bindLocation: tp.chatTab.pages[1], });
             initFolder({ location: tp.chatTab.pages[0], title: "Join/Leave Msgs Options", storeAs: "joinLeaveFolder", });
                 initModule({ location: tp.joinLeaveFolder, title: "Join Msgs", storeAs: "joinMessages", bindLocation: tp.chatTab.pages[1], });
                 initModule({ location: tp.joinLeaveFolder, title: "Leave Msgs", storeAs: "leaveMessages", bindLocation: tp.chatTab.pages[1], });
-                tp.joinLeaveFolder.addSeparator();
-                initModule({ location: tp.joinLeaveFolder, title: "Send2Chat", storeAs: "publicBroadcast", bindLocation: tp.chatTab.pages[1], disableConditions: [["joinMessages", false], ["leaveMessages", false]], });
-                initModule({ location: tp.joinLeaveFolder, title: "[SFC]Added", storeAs: "joinLeaveBranding", bindLocation: tp.chatTab.pages[1], disableConditions: [["joinMessages", false], ["leaveMessages", false]], });
         //LISTS MODULES
-        initFolder({ location: tp.mainPanel, title: "Lists", storeAs: "listsFolder", });
-        initTabs({ location: tp.listsFolder, storeAs: "listsTab" }, [
-            {
-                title: "WIP", content:
-`Sorry! No guide yet!`},
-        ]);
-            initModule({ location: tp.listsTab.pages[0], title: "Whitelist", storeAs: "whitelist", defaultValue: "User-1, User-2", });
-            initFolder({ location: tp.listsTab.pages[0], title: "Whitelist (Target Only) Options", storeAs: "whitelistFolder", });
-                initModule({ location: tp.whitelistFolder, title: "WAimbot", storeAs: "enableWhitelistAimbot", bindLocation: tp.listsTab.pages[1], });
-                initModule({ location: tp.whitelistFolder, title: "WESP", storeAs: "enableWhitelistTracers", bindLocation: tp.listsTab.pages[1], });
-                initModule({ location: tp.whitelistFolder, title: "WESPType", storeAs: "whitelistESPType", bindLocation: tp.listsTab.pages[1], dropdown: [{ text: "Only Include", value: "onlyinclude" }, { text: "Highlight", value: "highlight" },], defaultValue: "onlyinclude", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["enableWhitelistTracers", true]], });
-                initModule({ location: tp.whitelistFolder, title: "WHighlight", storeAs: "whitelistColor", defaultValue: "#e80aac", showConditions: [["enableWhitelistTracers", true], ["whitelistESPType", "highlight"]], });
-            tp.listsTab.pages[0].addSeparator();
-            initModule({ location: tp.listsTab.pages[0], title: "Blacklist", storeAs: "blacklist", defaultValue: "User-1, User-2", });
-            initFolder({ location: tp.listsTab.pages[0], title: "Blacklist (Exclude) Options", storeAs: "blacklistFolder", });
-                initModule({ location: tp.blacklistFolder, title: "BAimbot", storeAs: "enableBlacklistAimbot", bindLocation: tp.listsTab.pages[1], });
-                initModule({ location: tp.blacklistFolder, title: "BESP", storeAs: "enableBlacklistTracers", bindLocation: tp.listsTab.pages[1], });
-                initModule({ location: tp.blacklistFolder, title: "BESPType", storeAs: "blacklistESPType", bindLocation: tp.listsTab.pages[1], dropdown: [{ text: "Just Exclude", value: "justexclude" }, { text: "Highlight", value: "highlight" },], defaultValue: "justexclude", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["enableBlacklistTracers", true]], });
-                initModule({ location: tp.blacklistFolder, title: "BHighlight", storeAs: "blacklistColor", defaultValue: "#00ff00", showConditions: [["enableBlacklistTracers", true], ["blacklistESPType", "highlight"]], });
-        //AUTOMATION MODULES
+       //AUTOMATION MODULES
         initFolder({ location: tp.mainPanel, title: "Automation", storeAs: "automationFolder", });
         initTabs({ location: tp.automationFolder, storeAs: "automationTab" }, [
             {
                 title: "WIP", content:
 `Sorry! No guide yet!`},
         ]);
-            initModule({
-                location: tp.automationTab.pages[0], title: "Flood Report", storeAs: "floodReport", bindLocation: tp.automationTab.pages[1], button: "Spam Now!", clickFunction: function () {
-                    createPopup("Thank you for your efforts comrade! o7");
-                    spamReport();
-                },
-            });
-            tp.automationTab.pages[0].addSeparator();
-            initModule({ location: tp.automationTab.pages[0], title: "Bunnyhop", storeAs: "bunnyhop", bindLocation: tp.automationTab.pages[1], });
-            initModule({ location: tp.automationTab.pages[0], title: "Auto Walk", storeAs: "autoWalk", bindLocation: tp.automationTab.pages[1], });
-            initModule({ location: tp.automationTab.pages[0], title: "Auto Strafe", storeAs: "autoStrafe", bindLocation: tp.automationTab.pages[1], });
-            initModule({ location: tp.automationTab.pages[0], title: "Auto Jump", storeAs: "autoJump", bindLocation: tp.automationTab.pages[1], });
-            initModule({ location: tp.automationTab.pages[0], title: "Jump Delay", storeAs: "autoJumpDelay", slider: { min: 1, max: 10000, step: 1 }, defaultValue: 1, showConditions: [["autoJump", true]], });
-            tp.automationTab.pages[0].addSeparator();
             initModule({ location: tp.automationTab.pages[0], title: "AutoWeapon", storeAs: "autoWeapon", bindLocation: tp.automationTab.pages[1], dropdown: [{ text: "Disabled", value: "disabled" }, { text: "EggK-47", value: "eggk47" }, { text: "Scrambler", value: "scrambler" }, { text: "Free Ranger", value: "freeranger" }, { text: "RPEGG", value: "rpegg" }, { text: "Whipper", value: "whipper" }, { text: "Crackshot", value: "crackshot" }, { text: "Tri-Hard", value: "trihard" }, { text: "Randomised", value: "random" }], defaultValue: "disabled" });
             initModule({ location: tp.automationTab.pages[0], title: "AutoGrenade", storeAs: "autoGrenade", bindLocation: tp.automationTab.pages[1], });
             tp.automationTab.pages[0].addSeparator();
@@ -3825,11 +3786,8 @@ z-index: 999999;
         createAnonFunction('interceptDeath', (KILLER, DEAD) => {
             if (DEAD.name === KILLER.name === ss.MYPLAYER.name) return; // killed self (with grenade)
 
-            if (DEAD.name == ss.MYPLAYER.name) { // you died
-                if (extract("cheatAccuse")) sendChatMessage(`${KILLER.name} might be cheating, everyone report`);
-            } else if (KILLER.name == ss.MYPLAYER.name) { // you killed someone
+            if (KILLER.name == ss.MYPLAYER.name) { // you killed someone
                 unsafeWindow.BAWK.play("on_killed_enemy");
-                if (extract("autoEZ")) sendChatMessage(`imagine dying ${DEAD.name}, couldn't be me`);
             };
         });
         createAnonFunction('interceptDrawTextOnNameTexture', (nameTexture, args) => {
@@ -3917,35 +3875,7 @@ z-index: 999999;
                     forceControlKeysCache = false;
                     return 0;
                 } else {
-                    if (extract("autoWalk")) { CONTROLKEYS |= ss.CONTROLKEYSENUM.up };
                     // credit for code: de_neuublue
-                    if (extract("bunnyhop") && isKeyToggled.Space) {
-                        CONTROLKEYS |= ss.CONTROLKEYSENUM.jump;
-                    };
-                    if (extract("autoJump")) {
-                        if (Date.now() > (lastAutoJump + extract("autoJumpDelay"))) {
-                            CONTROLKEYS |= ss.CONTROLKEYSENUM.jump;
-                            lastAutoJump = Date.now();
-                        };
-                    };
-                    if (extract("autoStrafe")) {
-                        if (Date.now() > (autoStrafeValue[0])) {
-                            if (autoStrafeValue[1] == 0) { //decide new strafe delay
-                                autoStrafeValue[0] = Date.now() + randomInt(500, 3000);
-                                autoStrafeValue[2] = (Math.random() > 0.5) ? "left" : "right";
-                                autoStrafeValue[1] = 1;
-                            } else if (autoStrafeValue[1] == 1) { //time to start strafe
-                                autoStrafeValue[3] = Date.now() + randomInt(500, 2000);
-                                autoStrafeValue[1] = 2;
-                            } else if (autoStrafeValue[1] == 2 && Date.now() < autoStrafeValue[3]) { //do strafe
-                                CONTROLKEYS |= ss.CONTROLKEYSENUM[autoStrafeValue[2]];
-                            } else if (autoStrafeValue[1] == 2) { //stop strafe
-                                CONTROLKEYS &= ~ss.CONTROLKEYSENUM.left;
-                                CONTROLKEYS &= ~ss.CONTROLKEYSENUM.right;
-                                autoStrafeValue[1] = 0;
-                            };
-                        };
-                    };
                     return CONTROLKEYS;
                 };
             };
@@ -5080,9 +5010,6 @@ z-index: 999999;
                 crosshairsPosition.y += verticalOffset + 0.4;
 
                 ammo = ss.MYPLAYER.weapon.ammo;
-
-                whitelistPlayers = (extract("whitelist") || "").split(',');
-                blacklistPlayers = (extract("blacklist") || "").split(',');
 
                 ss.MYPLAYER[H.actor].scene.texturesEnabled = extract("enableTextures");
             };

@@ -480,9 +480,6 @@ let attemptedInjection = false;
                     if (state != "NOMSG") {
                         if (state === true || state === false || state === undefined) { state = (state ? "ON" : "OFF") };
                         popupText = "Set " + module + " to: " + state;
-                        if (extract("announcer")) {
-                            sendChatMessage("I just set " + module + " to " + state + "!");
-                        };
                     } else {
                         switch (module) {
                             case ("hide"):
@@ -703,10 +700,6 @@ let attemptedInjection = false;
             initModule({ location: tp.chatTab.pages[0], title: "Tall Chat", storeAs: "tallChat", bindLocation: tp.chatTab.pages[1], });
             tp.chatTab.pages[0].addSeparator();
             initModule({ location: tp.chatTab.pages[0], title: "AntiAFK", storeAs: "antiAFK", bindLocation: tp.chatTab.pages[1], });
-            initModule({ location: tp.chatTab.pages[0], title: "Spammer", storeAs: "spamChat", bindLocation: tp.chatTab.pages[1], });
-            initFolder({ location: tp.chatTab.pages[0], title: "Spammer Options", storeAs: "spammerFolder", });
-                initModule({ location: tp.spammerFolder, title: "Delay (ms)", storeAs: "spamChatDelay", slider: { min: 250, max: 60000, step: 10 }, defaultValue: 500, enableConditions: [["spamChat", true]], });
-                initModule({ location: tp.spammerFolder, title: "Spam Text", storeAs: "spamChatText", defaultValue: "ЅtateFarm Client On Top! ", });
             initFolder({ location: tp.chatTab.pages[0], title: "Trolling", storeAs: "trollingFolder", });
                 initModule({ location: tp.trollingFolder, title: "Mock", storeAs: "mockMode", bindLocation: tp.chatTab.pages[1], });
                 initModule({ location: tp.trollingFolder, title: "Announcer", storeAs: "announcer", bindLocation: tp.chatTab.pages[1], });
@@ -1476,10 +1469,6 @@ debug mode).`},
         }, 500);
 
         menuInitiated = reset == "init" ? "init" : true;
-        const defaultSpamText = ("dsc.gg/s𝖿network: " + menuTitle + " On Top! ");
-
-        if (extract("spamChatText").includes("On Top!")) { change("spamChatText", defaultSpamText) };
-        if (extract("spamChatTextBot").includes("On Top!")) { change("spamChatTextBot", defaultSpamText) };
 
         makeDraggable(tp.mainPanel.containerElem_);
         makeDraggable(tp.botPanel.containerElem_);

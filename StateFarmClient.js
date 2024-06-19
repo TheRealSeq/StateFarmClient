@@ -652,98 +652,6 @@ let attemptedInjection = false;
             initModule({ location: tp.sfChatTab.pages[0], title: "Notifications", storeAs: "sfChatNotifications", bindLocation: tp.sfChatTab.pages[1], });
             initModule({ location: tp.sfChatTab.pages[0], title: "Notification Sound", storeAs: "sfChatNotificationSound", bindLocation: tp.sfChatTab.pages[1], });
             initModule({ location: tp.sfChatTab.pages[0], title: "Auto Start Chat", storeAs: "sfChatAutoStart", bindLocation: tp.sfChatTab.pages[1], });
-        //COMBAT MODULES
-        initFolder({ location: tp.mainPanel, title: "Combat", storeAs: "combatFolder", });
-        initTabs({ location: tp.combatFolder, storeAs: "combatTab" }, [
-            {
-                title: "Basics", content:
-`This is the combat tab. Here you will find
-options relating to aimbotting, and other
-useful macros. Aimbot is made active by
-turning it on. Using ToggleRM will give you
-more control by allowing you to switch by
-pressing the right mouse button.
-TargetMode also allows a more intuitive
-means of selecting who you will target.
-The most powerful features you can use
-are Predictions and Antibloom. These
-improve the accuracy of the tracking.
-AntiSwitch will make you lock on to a
-target until they die, and if you don't want
-to target them after they die then choose
-1Kill too. Auto Refill helps you stay
-topped up and choosing the Smart
-mode allows you to refill at the moment
-when you will not have a long
-reload time. GrenadeMAX makes all
-grenades get thrown at max strength.`},
-            {
-                title: "Visibility", content:
-`There are a couple of options related to
-visibility (Line-of-Sight). First is
-TargetVisible. This tunes the aimbot to
-be more strategic with where it aims.
-NoWallTrack makes it such that if a
-targeted player goes behind a wall, you
-stop aimlocking them. There is also an
-AutoFire mode with this sort of
-functionality.`},
-            {
-                title: "Advanced", content:
-`If you want to increase stealthiness,
-make use of MinAngle and AntiSnap. The
-first will make it so that you have to
-manually move your reticle within your
-specified radius to lock on. The latter
-smooths snapping, which evades
-detection on botter spotter scripts.
-If you want to be more powerful, opt for
-SilentAim. This modifies your direction
-packets instead of making you lock on.
-However, this can lead to slightly glitchy
-movement. When this is on, MinAngle
-changes to instead narrow down the
-selection of targets rather than acting
-as a guide.
-AntiSneak is a module which, while not
-always showing use, can help you in a
-difficult situation. It automatically
-switches targets to a player that enters
-your specified range, and begins
-shooting with your primary gun, and then
-the pistol. Ideal use case is when you are
-sniping and someone sneaks up on you
-(...hence it is called... AntiSneak).`},
-        ]);
-            initModule({ location: tp.combatTab.pages[0], title: "Aimbot", storeAs: "aimbot", bindLocation: tp.combatTab.pages[1], defaultBind: "V", });
-            initFolder({ location: tp.combatTab.pages[0], title: "Aimbot Options", storeAs: "aimbotFolder", });
-                initModule({ location: tp.aimbotFolder, title: "TargetMode", storeAs: "aimbotTargetMode", bindLocation: tp.combatTab.pages[1], defaultBind: "T", dropdown: [{ text: "Pointing At", value: "pointingat" }, { text: "Nearest", value: "nearest" }], defaultValue: "pointingat", enableConditions: [["aimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "TargetVisible", storeAs: "aimbotVisibilityMode", bindLocation: tp.combatTab.pages[1], dropdown: [{ text: "Disabled", value: "disabled" }, { text: "Prioritise Visible", value: "prioritise" }, { text: "Only Visible", value: "onlyvisible" }], defaultValue: "disabled", enableConditions: [["aimbot", true]] });
-                tp.aimbotFolder.addSeparator();
-                initModule({ location: tp.aimbotFolder, title: "ToggleRM", storeAs: "aimbotRightClick", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "SilentAim", storeAs: "silentAimbot", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "SemiSilent", storeAs: "aimbSemiSilent", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true], ["silentAimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "NoWallTrack", storeAs: "noWallTrack", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true], ["silentAimbot", false]], });
-                tp.aimbotFolder.addSeparator();
-                initModule({ location: tp.aimbotFolder, title: "Prediction", storeAs: "prediction", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "AntiBloom", storeAs: "antiBloom", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true]], });
-                tp.aimbotFolder.addSeparator();
-                initModule({ location: tp.aimbotFolder, title: "AntiSwitch", storeAs: "antiSwitch", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "1 Kill", storeAs: "oneKill", bindLocation: tp.combatTab.pages[1], enableConditions: [["aimbot", true]], });
-                tp.aimbotFolder.addSeparator();
-                initModule({ location: tp.aimbotFolder, title: "MinAngle", storeAs: "aimbotMinAngle", slider: { min: 0.05, max: 360, step: 1 }, defaultValue: 360, enableConditions: [["aimbot", true]], });
-                initModule({ location: tp.aimbotFolder, title: "AntiSnap", storeAs: "aimbotAntiSnap", slider: { min: 0, max: 0.99, step: 0.01 }, defaultValue: 0, enableConditions: [["aimbot", true], ["silentAimbot", false]], });
-                initModule({ location: tp.aimbotFolder, title: "AntiSneak", storeAs: "antiSneak", slider: { min: 0, max: 5, step: 0.2 }, defaultValue: 0, enableConditions: [["aimbot", true]], });
-                tp.aimbotFolder.addSeparator();
-                initModule({ location: tp.aimbotFolder, title: "ESPColor", storeAs: "aimbotColor", defaultValue: "#0000ff", enableConditions: [["aimbot", true]] });
-            tp.combatTab.pages[0].addSeparator();
-            initModule({ location: tp.combatTab.pages[0], title: "Auto Refill", storeAs: "autoRefill", bindLocation: tp.combatTab.pages[1], });
-            initModule({ location: tp.combatTab.pages[0], title: "Smart Refill", storeAs: "smartRefill", bindLocation: tp.combatTab.pages[1], showConditions: [["autoRefill", true]], });
-            tp.combatTab.pages[0].addSeparator();
-            initModule({ location: tp.combatTab.pages[0], title: "Auto Fire", storeAs: "enableAutoFire", bindLocation: tp.combatTab.pages[1], });
-            initModule({ location: tp.combatTab.pages[0], title: "AutoFireType", storeAs: "autoFireType", bindLocation: tp.combatTab.pages[1], dropdown: [{ text: "Force Automatic", value: "forceAutomatic" }, { text: "While Visible", value: "whileVisible" }, { text: "While Aimbotting", value: "whileAimbot" }, { text: "Visible and Aimbotting", value: "whileVisAimbot" }, { text: "Always", value: "always" }], defaultValue: "leftMouse", showConditions: [["enableAutoFire", true]] });
-            tp.combatTab.pages[0].addSeparator();
-            initModule({ location: tp.combatTab.pages[0], title: "GrenadeMAX", storeAs: "grenadeMax", bindLocation: tp.combatTab.pages[1], });
         //RENDER MODULES
         initFolder({ location: tp.mainPanel, title: "Render", storeAs: "renderFolder", });
         initTabs({ location: tp.renderFolder, storeAs: "renderTab" }, [
@@ -751,37 +659,6 @@ sniping and someone sneaks up on you
                 title: "WIP", content:
 `Sorry! No guide yet!`},
         ]);
-            initModule({ location: tp.renderTab.pages[0], title: "PlayerESP", storeAs: "playerESP", bindLocation: tp.renderTab.pages[1], });
-            initModule({ location: tp.renderTab.pages[0], title: "Tracers", storeAs: "tracers", bindLocation: tp.renderTab.pages[1], });
-            initModule({ location: tp.renderTab.pages[0], title: "Chams", storeAs: "chams", bindLocation: tp.renderTab.pages[1], });
-            initModule({ location: tp.renderTab.pages[0], title: "Nametags", storeAs: "nametags", bindLocation: tp.renderTab.pages[1], });
-            initModule({ location: tp.renderTab.pages[0], title: "Targets", storeAs: "targets", bindLocation: tp.renderTab.pages[1], });
-            initModule({ location: tp.renderTab.pages[0], title: "PredictionESP", storeAs: "predictionESP", bindLocation: tp.renderTab.pages[1], });
-            tp.renderTab.pages[0].addSeparator();
-            initFolder({ location: tp.renderTab.pages[0], title: "Player ESP/Tracers Options", storeAs: "tracersFolder", });
-                initModule({ location: tp.tracersFolder, title: "Type", storeAs: "tracersType", bindLocation: tp.renderTab.pages[1], dropdown: [{ text: "Static", value: "static" }, { text: "Proximity", value: "proximity" }, { text: "Visibility", value: "visibility" }], defaultValue: "static", disableConditions: [["tracers", false], ["playerESP", false]], });
-                initModule({ location: tp.tracersFolder, title: "Color 1", storeAs: "tracersColor1", defaultValue: "#ff0000", disableConditions: [["tracers", false], ["playerESP", false]], });
-                initModule({ location: tp.tracersFolder, title: "Color 2", storeAs: "tracersColor2", defaultValue: "#00ff00", disableConditions: [["tracers", false], ["playerESP", false]], hideConditions: [["tracersType", "static"]], });
-                initModule({ location: tp.tracersFolder, title: "Color 3", storeAs: "tracersColor3", defaultValue: "#ffffff", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["tracersType", "proximity"]], });
-                initModule({ location: tp.tracersFolder, title: "Dist 1->2", storeAs: "tracersColor1to2", slider: { min: 0, max: 30, step: 0.25 }, defaultValue: 5, showConditions: [["tracersType", "proximity"]], disableConditions: [["tracers", false], ["playerESP", false]], });
-                initModule({ location: tp.tracersFolder, title: "Dist 2->3", storeAs: "tracersColor2to3", slider: { min: 0, max: 30, step: 0.25 }, defaultValue: 15, showConditions: [["tracersType", "proximity"]], disableConditions: [["tracers", false], ["playerESP", false]], });
-                tp.tracersFolder.addSeparator();
-                initModule({ location: tp.tracersFolder, title: "PredictionESPColor", storeAs: "predictionESPColor", defaultValue: "#ff0000", disableConditions: [ ["predictionESP", false]], });
-            tp.renderTab.pages[0].addSeparator();
-            initFolder({ location: tp.renderTab.pages[0], title: "Ammo ESP/Tracers Options", storeAs: "tracersAmmoFolder", });
-                initFolder({ location: tp.tracersAmmoFolder, title: "Ammo", storeAs: "ammoFolder", });
-                    initModule({ location: tp.ammoFolder, title: "AESP", storeAs: "ammoESP", bindLocation: tp.renderTab.pages[1], });
-                    initModule({ location: tp.ammoFolder, title: "ATracers", storeAs: "ammoTracers", bindLocation: tp.renderTab.pages[1], });
-                    tp.ammoFolder.addSeparator();
-                    initModule({ location: tp.ammoFolder, title: "ARegime", storeAs: "ammoESPRegime", bindLocation: tp.renderTab.pages[1], dropdown: [{ text: "When Depleted", value: "whendepleted" }, { text: "When Low", value: "whenlow" }, { text: "Below Max", value: "belowmax" }, { text: "Always On", value: "alwayson" },], defaultValue: "whendepleted", disableConditions: [["ammoESP", false], ["ammoTracers", false]], });
-                    initModule({ location: tp.ammoFolder, title: "AColor", storeAs: "ammoESPColor", defaultValue: "#ffff00", disableConditions: [["ammoESP", false], ["ammoTracers", false]], });
-                initFolder({ location: tp.tracersAmmoFolder, title: "Grenades", storeAs: "grenadesFolder", });
-                    initModule({ location: tp.grenadesFolder, title: "GESP", storeAs: "grenadeESP", bindLocation: tp.renderTab.pages[1], });
-                    initModule({ location: tp.grenadesFolder, title: "GTracers", storeAs: "grenadeTracers", bindLocation: tp.renderTab.pages[1], });
-                    tp.grenadesFolder.addSeparator();
-                    initModule({ location: tp.grenadesFolder, title: "GRegime", storeAs: "grenadeESPRegime", bindLocation: tp.renderTab.pages[1], dropdown: [{ text: "When Depleted", value: "whendepleted" }, { text: "When Low", value: "whenlow" }, { text: "Below Max", value: "belowmax" }, { text: "Always On", value: "alwayson" },], defaultValue: "whendepleted", disableConditions: [["grenadeESP", false], ["grenadeTracers", false]], });
-                    initModule({ location: tp.grenadesFolder, title: "GColor", storeAs: "grenadeESPColor", defaultValue: "#00ffff", disableConditions: [["grenadeESP", false], ["grenadeTracers", false]], });
-            tp.renderTab.pages[0].addSeparator();
             initModule({ location: tp.renderTab.pages[0], title: "show look dir", storeAs: "lookTracers", bindLocation: tp.renderTab.pages[1], });
             initFolder({ location: tp.renderTab.pages[0], title: "look direction options", storeAs: "lookTracersFolder", });
                 initModule({ location: tp.lookTracersFolder, title: "render above", storeAs: "lookTracersRGI1", bindLocation: tp.renderTab.pages[1], });
@@ -814,7 +691,7 @@ sniping and someone sneaks up on you
             initModule({ location: tp.hudTab.pages[0], title: "Show Bloom", storeAs: "revealBloom", bindLocation: tp.hudTab.pages[1], });
             initModule({ location: tp.hudTab.pages[0], title: "Show LOS", storeAs: "showLOS", bindLocation: tp.hudTab.pages[1], });
             initModule({ location: tp.hudTab.pages[0], title: "Show MinAngle", storeAs: "showMinAngle", bindLocation: tp.hudTab.pages[1], });
-            initModule({ showConditions: [["disabledlmao", true]], location: tp.hudTab.pages[0], title: "Leaderboard", storeAs: "highlightLeaderboard", bindLocation: tp.hudTab.pages[1], enableConditions: [["aimbot", true]], });
+            initModule({ showConditions: [["disabledlmao", true]], location: tp.hudTab.pages[0], title: "Leaderboard", storeAs: "highlightLeaderboard", bindLocation: tp.hudTab.pages[1], });
             tp.hudTab.pages[0].addSeparator();
             initModule({ location: tp.hudTab.pages[0], title: "Co-ords", storeAs: "showCoordinates", bindLocation: tp.hudTab.pages[1], });
             initModule({ location: tp.hudTab.pages[0], title: "RadarWIP", storeAs: "radar", bindLocation: tp.hudTab.pages[1], });
@@ -866,16 +743,16 @@ sniping and someone sneaks up on you
             initModule({ location: tp.listsTab.pages[0], title: "Whitelist", storeAs: "whitelist", defaultValue: "User-1, User-2", });
             initFolder({ location: tp.listsTab.pages[0], title: "Whitelist (Target Only) Options", storeAs: "whitelistFolder", });
                 initModule({ location: tp.whitelistFolder, title: "WAimbot", storeAs: "enableWhitelistAimbot", bindLocation: tp.listsTab.pages[1], });
-                initModule({ location: tp.whitelistFolder, title: "WESP", storeAs: "enableWhitelistTracers", bindLocation: tp.listsTab.pages[1], disableConditions: [["tracers", false], ["playerESP", false]], });
+                initModule({ location: tp.whitelistFolder, title: "WESP", storeAs: "enableWhitelistTracers", bindLocation: tp.listsTab.pages[1], });
                 initModule({ location: tp.whitelistFolder, title: "WESPType", storeAs: "whitelistESPType", bindLocation: tp.listsTab.pages[1], dropdown: [{ text: "Only Include", value: "onlyinclude" }, { text: "Highlight", value: "highlight" },], defaultValue: "onlyinclude", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["enableWhitelistTracers", true]], });
-                initModule({ location: tp.whitelistFolder, title: "WHighlight", storeAs: "whitelistColor", defaultValue: "#e80aac", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["enableWhitelistTracers", true], ["whitelistESPType", "highlight"]], });
+                initModule({ location: tp.whitelistFolder, title: "WHighlight", storeAs: "whitelistColor", defaultValue: "#e80aac", showConditions: [["enableWhitelistTracers", true], ["whitelistESPType", "highlight"]], });
             tp.listsTab.pages[0].addSeparator();
             initModule({ location: tp.listsTab.pages[0], title: "Blacklist", storeAs: "blacklist", defaultValue: "User-1, User-2", });
             initFolder({ location: tp.listsTab.pages[0], title: "Blacklist (Exclude) Options", storeAs: "blacklistFolder", });
                 initModule({ location: tp.blacklistFolder, title: "BAimbot", storeAs: "enableBlacklistAimbot", bindLocation: tp.listsTab.pages[1], });
-                initModule({ location: tp.blacklistFolder, title: "BESP", storeAs: "enableBlacklistTracers", bindLocation: tp.listsTab.pages[1], disableConditions: [["tracers", false], ["playerESP", false]], });
+                initModule({ location: tp.blacklistFolder, title: "BESP", storeAs: "enableBlacklistTracers", bindLocation: tp.listsTab.pages[1], });
                 initModule({ location: tp.blacklistFolder, title: "BESPType", storeAs: "blacklistESPType", bindLocation: tp.listsTab.pages[1], dropdown: [{ text: "Just Exclude", value: "justexclude" }, { text: "Highlight", value: "highlight" },], defaultValue: "justexclude", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["enableBlacklistTracers", true]], });
-                initModule({ location: tp.blacklistFolder, title: "BHighlight", storeAs: "blacklistColor", defaultValue: "#00ff00", disableConditions: [["tracers", false], ["playerESP", false]], showConditions: [["enableBlacklistTracers", true], ["blacklistESPType", "highlight"]], });
+                initModule({ location: tp.blacklistFolder, title: "BHighlight", storeAs: "blacklistColor", defaultValue: "#00ff00", showConditions: [["enableBlacklistTracers", true], ["blacklistESPType", "highlight"]], });
         //AUTOMATION MODULES
         initFolder({ location: tp.mainPanel, title: "Automation", storeAs: "automationFolder", });
         initTabs({ location: tp.automationFolder, storeAs: "automationTab" }, [
@@ -2704,116 +2581,6 @@ z-index: 999999;
             document.querySelector(".chat-container").scrollTop = document.querySelector(".chat-container").scrollHeight;
         };
     };
-    const updateOrCreateLinesESP = function (object, type, color) {
-        let newPosition, newScene, newParent
-        if (type == "playerESP") {
-            newPosition = object[H.actor][H.mesh].position;
-            newScene = object[H.actor].scene;
-            newParent = object[H.actor][H.mesh];
-        } else if (type == "pPredESP") { //objects will be player.pred, object of BABYLON.TransformNode. https://doc.babylonjs.com/typedoc/classes/BABYLON.TransformNode
-            newPosition = object.getAbsolutePosition(); //we now use the TN's absolutePosition instead of an own var. It's just cleaner this way imo
-            newScene = object.getScene(); //getters, yummy
-            newParent = object; //will be the TransformNode stored in player.pred, so we can keep this as parent.
-        }  else {
-            newPosition = object.position;
-            newScene = object._scene;
-            newParent = object;
-        };
-        if (!object.generatedESP) {
-            //tracers
-            const tracerLines = L.BABYLON.MeshBuilder.CreateLines("tracerLines", { points: [newPosition, crosshairsPosition] }, newScene);
-            tracerLines.color = new L.BABYLON.Color3(1, 1, 1);
-            tracerLines.renderingGroupId = 1;
-            object.tracerLines = tracerLines;
-            //ESP
-            //FUCK WIREFRAME BOXES! LIBERTYMUTUAL dictates we making our own MANUALLY bitch! to hell with those diagonal lines
-            const boxSize = {
-                playerESP: { width: 0.5, height: 0.75, depth: 0.5 },
-                pPredESP: { width: 0.5, height: 0.75, depth: 0.5 },
-                ammoESP: { width: 0.25, height: 0.35, depth: 0.25 },
-            };
-            const boxOffset = {
-                playerESP: 0,
-                pPredESP: 0,
-                ammoESP: -0.05,
-            };
-            const vertices = [
-                new L.BABYLON.Vector3(-boxSize[type].width / 2, boxOffset[type], -boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(boxSize[type].width / 2, boxOffset[type], -boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(boxSize[type].width / 2, boxOffset[type] + boxSize[type].height, -boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(-boxSize[type].width / 2, boxOffset[type] + boxSize[type].height, -boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(-boxSize[type].width / 2, boxOffset[type], boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(boxSize[type].width / 2, boxOffset[type], boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(boxSize[type].width / 2, boxOffset[type] + boxSize[type].height, boxSize[type].depth / 2),
-                new L.BABYLON.Vector3(-boxSize[type].width / 2, boxOffset[type] + boxSize[type].height, boxSize[type].depth / 2),
-            ];
-            const lines = [];
-            for (let i = 0; i < 4; i++) {
-                lines.push([vertices[i], vertices[(i + 1) % 4]]);
-                lines.push([vertices[i + 4], vertices[(i + 1) % 4 + 4]]);
-                lines.push([vertices[i], vertices[i + 4]]);
-            };
-            const box = L.BABYLON.MeshBuilder.CreateLineSystem(getScrambled(), { lines }, newScene);
-            box.color = new L.BABYLON.Color3(1, 1, 1);
-            box.position.y = boxOffset[type];
-            box.renderingGroupId = 1;
-            box.parent = newParent;
-            object.box = box;
-            //TARGETS
-            let target;
-            if (type == "playerESP") {
-                target = L.BABYLON.MeshBuilder.CreateSphere(getScrambled(), { diameter: 0.05 }, newScene);
-                target.material = new L.BABYLON.StandardMaterial(getScrambled(), newScene);
-                target.material.diffuseColor = new L.BABYLON.Color3(1, 0, 0);
-                target.material.alpha = 0.5;
-                target.position.y = 0.3;
-                target.renderingGroupId = 1;
-                target.parent = newParent;
-                object.target = target;
-            };
-            /*---fwltv2---*/
-            if(type == "playerESP"){
-                //create line. other shit later
-                const l = L.BABYLON.MeshBuilder.CreateLines(getScrambled(),{points: [new L.BABYLON.Vector3(0, 0, 0),new L.BABYLON.Vector3(0, 0, 0)]}, newScene); //empty lines. will be edited l8er
-                //l.renderingGroupId = 1;
-
-                object.lookDirLine = l;
-                //line will be updated every call, not just creation. I hate this but fuck you
-            }
-            /*----------------------*/
-            //stuff
-            object.generatedESP = true;
-            ESPArray.push([object, tracerLines, box, target, object.lookDirLine]);
-        };
-        if(object.lookDirLine && extract("lookTracers")){ //no need to update if module disabled. Raycasts aren't the best thing to run every frame without any use...
-            const TRACE_LENGTH_MULTIPLIER = 75; //how long is the trace max?
-            const playerEye = object[H.actor].eye; // BABYLON.TransformNode (https://doc.babylonjs.com/typedoc/classes/BABYLON.TransformNode). TN of the "eye", as shell calls it. Basically camera pos.
-
-            let conclusion /*:trol:*/ = playerEye.forward.clone(); // BABYLON.Vector3 (https://doc.babylonjs.com/typedoc/classes/BABYLON.Vector3). this vector is NORMALIZED
-            conclusion= conclusion.scale(TRACE_LENGTH_MULTIPLIER); //scale by the multiplier to extend the normalized vector. TODO: make multiplier customizable by USER
-            conclusion= conclusion.add(playerEye.absolutePosition); //add pos so we are relative to eye
-
-            //RAYCAST
-            const rayToGround = ss.RAYS[H.rayCollidesWithMap](object[H.actor].eye.absolutePosition, conclusion, ss.RAYS.grenadeCollidesWithCell); //does player look at object, if yes, where?
-            const g = playerEye.absolutePosition; //easier acess
-            if(rayToGround){
-                object.lookDirLine.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [g.x, g.y, g.z, rayToGround.pick.pickedPoint.x, rayToGround.pick.pickedPoint.y, rayToGround.pick.pickedPoint.z]);
-                //set line to correct points, with the map collision as endpoint
-            }
-            if(!rayToGround){
-                const f = conclusion;//easier acess
-                object.lookDirLine.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [g.x, g.y, g.z, f.x, f.y, f.z]);
-                //set line to correct points, with the max dist scaled dirVec3 as endpoint
-            }
-
-            object.lookDirLine.color = new L.BABYLON.Color3(...hexToRgb(extract("lookTracersColor"))); //updaté line colo(u)r
-            object.lookDirLine.renderingGroupId = extract("lookTracersRGI1")? 1 : 0; //render in front shell?
-            //I dont really like the implementation without parenting, but IDK how the fuck bab's parenting system works and we need to update anyway. :/
-        }
-        object.tracerLines.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [crosshairsPosition.x, crosshairsPosition.y, crosshairsPosition.z, newPosition.x, newPosition.y, newPosition.z]);
-        object.tracerLines.color = new L.BABYLON.Color3(...color);
-        object.box.color = new L.BABYLON.Color3(...color);
-    };
     const obfuscateEmail = function(email) {
         const parts = email.split('@');
         const modifiedFirstPart = parts[0].substring(0, 1) +
@@ -4001,15 +3768,7 @@ z-index: 999999;
         //     log(arr)
         // };
 
-        if (arr[0] == ss.SERVERCODES.throwGrenade) { // comm code 27 = client to server grenade throw
-            if (extract("grenadeMax")) {
-                arr[1] = 255;
-                log("StateFarm: modified a grenade packet to be at full power");
-                return arr.buffer;
-            } else {
-                log("StateFarm: didn't modify grenade packet")
-            };
-        } else if (arr[0] == ss.SERVERCODES.chat) {
+        if (arr[0] == ss.SERVERCODES.chat) {
             log('%c Chat packet sent, chat handler!!!', css);
             return chatPacketHandler(data);
         } else {
@@ -4114,21 +3873,6 @@ z-index: 999999;
         let distanceToMap = rayCollidesWithMap ? L.BABYLON.Vector3.DistanceSquared(position, rayCollidesWithMap.pick.pickedPoint) : Infinity;
         let distanceToTarget = L.BABYLON.Vector3.DistanceSquared(position, targetPosition)
         return distanceToTarget < distanceToMap
-    };
-    const getAimbot = function (target) {
-        let targetPosition = extract("prediction") ? predictPosition(target) : target[H.actor][H.mesh].position;
-        let directionVector = getDirectionVectorFacingTarget(targetPosition, true, -0.05);
-
-        let direction = {
-            yawReal: calculateYaw(directionVector),
-            pitchReal: calculatePitch(directionVector),
-        };
-
-        if (extract("antiBloom")) {
-            direction = applyBloom(direction, 1);
-        };
-
-        return direction;
     };
     const injectScript = function () {
         //TODO: replace with anon functions
@@ -4240,72 +3984,6 @@ z-index: 999999;
                 name = "silence";
             };
             return [name, panner, somethingelse];
-        });
-        createAnonFunction('beforeFiring', function (MYPLAYER) {
-            if (extract("aimbot") && (extract("aimbotRightClick") ? isRightButtonDown : true) && (targetingComplete || extract("silentAimbot")) && ss.MYPLAYER[H.playing] && currentlyTargeting && currentlyTargeting[H.playing]) {
-                const aimbot = getAimbot(currentlyTargeting);
-                // credit for code: de_neuublue
-                let diffYaw = Math.radDifference(ss.MYPLAYER[H.yaw], aimbot.yawReal) * 180 / Math.PI;
-                let diffPositive = diffYaw > 0 // a turn to the left if positive
-                diffYaw *= diffPositive ? 1 : -1;
-                for (let i = 0; i < 3; i++) {
-                    let state = ss.MYPLAYER[H.stateBuffer][Math.mod(ss.MYPLAYER.stateIdx - i, 256)];
-                    let newControlKeys = 0;
-                    if (diffYaw > 157.5) {
-                        newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.right : 0
-                        newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.left : 0
-                        newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.down : 0
-                        newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.up : 0
-                    } else if (diffYaw > 112.5) {
-                        if (diffPositive) {
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.left : 0
-                        } else {
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.right : 0
-                        }
-                    } else if (diffYaw > 67.5) {
-                        if (diffPositive) {
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.up : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.down : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.left : 0
-                        } else {
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.down : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.up : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.right : 0
-                        }
-                    } else if (diffYaw > 22.5) {
-                        if (diffPositive) {
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.left : 0
-                        } else {
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.left ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.right ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.right : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.up ? ss.CONTROLKEYSENUM.up + ss.CONTROLKEYSENUM.left : 0
-                            newControlKeys |= ss.CONTROLKEYS & ss.CONTROLKEYSENUM.down ? ss.CONTROLKEYSENUM.down + ss.CONTROLKEYSENUM.right : 0
-                        };
-                    };
-                    // log(ss.CONTROLKEYS, newControlKeys);
-                    state.controlKeys |= newControlKeys;
-                    state[H.yaw] = setPrecision(aimbot.yawReal);
-                    state[H.pitch] = setPrecision(aimbot.pitchReal);
-                    ss.MYPLAYER[H.stateBuffer][Math.mod(ss.MYPLAYER.stateIdx - i, 256)] = state;
-                };
-                if(extract("aimbSemiSilent") && extract("silentAimbot")){
-                    ss.MYPLAYER[H.yaw] = getAimbot(currentlyTargeting).yawReal;
-                    ss.MYPLAYER[H.pitch] = getAimbot(currentlyTargeting).pitchReal;
-                }
-                log("force update?");
-                ss.SERVERSYNC();
-            };
         });
         createAnonFunction('onConnectFail', function (ERRORCODE, ERRORARRAY) {
             if (ERRORCODE !== ERRORARRAY.mainMenu) {
@@ -5538,179 +5216,6 @@ z-index: 999999;
                 ss.MYPLAYER[H.actor].scene.texturesEnabled = extract("enableTextures");
             };
         };
-        const updateLinesESP = function () {
-            const objExists = Date.now();
-
-            //update playerESP boxes, tracer lines, colors
-            ss.PLAYERS.forEach(player => {
-                if (player && (player !== ss.MYPLAYER) && player[H.playing] && (player[H.hp] > 0) && ((!ss.MYPLAYER.team) || (player.team !== ss.MYPLAYER.team))) {
-                    const whitelisted = (extract("whitelistESPType") == "highlight" || !extract("enableWhitelistTracers") || playerMatchesList(whitelistPlayers, player));
-                    const blacklisted = (extract("blacklistESPType") == "justexclude" && extract("enableBlacklistTracers") && playerMatchesList(blacklistPlayers, player));
-                    const passedLists = whitelisted && (!blacklisted);
-                    const tracersType = extract("tracersType");
-
-                    //predEsp
-                    if (extract("predictionESP")) {
-                      if (!player.pred) { //do we need a new TN as parent?
-                        const pPTransformNode = new L.BABYLON.TransformNode("pPredTNode", player[H.actor].scene); //TN's are literally perfect for this wtf
-                        pPTransformNode.parent = player[H.actor][H.mesh]; //parent to the player's mesh. Not really needed, but good practise.
-                        player.pred = pPTransformNode; //why use object actually? All the info is stored right in the TN :)
-                      };
-                      if (player.pred && player.pred.getScene()) { //does pred exist and is on a valid scene? not really needed, as we literally
-                        //create the thing above if this is not the case, but eh. Better safe than sorry
-                        player.pred.setAbsolutePosition(predictPosition(player)); //transformNode is attached to mesh, so we need absolute pos here.
-                        updateOrCreateLinesESP(player.pred, "pPredESP", hexToRgb(extract("predictionESPColor"))); //I love names. pPredESP, pPTransformNode. Truly nice
-                        player.pred.exists = objExists; //make sure the lines don't get picked up by the ESPLines Garbage collector afterwards
-                        player.pred.tracerLines.visibility = false; //they just don't work for this.
-                      };
-                    };
-
-                    let color, progress;
-                    if (extract("enableWhitelistTracers") && extract("whitelistESPType") == "highlight" && playerMatchesList(whitelistPlayers, player)) {
-                        color = hexToRgb(extract("whitelistColor"));
-                    } else if (extract("enableBlacklistTracers") && extract("blacklistESPType") == "highlight" && playerMatchesList(blacklistPlayers, player)) {
-                        color = hexToRgb(extract("blacklistColor"));
-                    } else if (tracersType == "proximity") {
-                        const distance = distancePlayers(player);
-                        if (distance < extract("tracersColor1to2")) { //fade between first set
-                            progress = (distance / extract("tracersColor1to2"));
-                            color = fadeBetweenColors(extract("tracersColor1"), extract("tracersColor2"), progress);
-                        } else if (distance < extract("tracersColor2to3")) { //fade between second set
-                            progress = ((distance - extract("tracersColor1to2")) / (extract("tracersColor2to3") - extract("tracersColor1to2")));
-                            color = fadeBetweenColors(extract("tracersColor2"), extract("tracersColor3"), progress);
-                        } else {
-                            color = hexToRgb(extract("tracersColor3"));
-                        };
-                    } else if (tracersType == "static") {
-                        color = hexToRgb(extract("tracersColor1"));
-                    } else if (tracersType == "visibility") {
-                        color = getLineOfSight(player) ? hexToRgb(extract("tracersColor2")) : hexToRgb(extract("tracersColor1"))
-                    };
-                    updateOrCreateLinesESP(player, "playerESP", color);
-
-                    player.tracerLines.visibility = player[H.playing] && extract("tracers") && passedLists;
-                    player.lookDirLine.visibility = player[H.playing] && extract("lookTracers") && passedLists;
-                    player.box.visibility = extract("playerESP") && passedLists;
-                    // player.target.visibility = extract("targets") && passedLists;
-                    player.target.visibility = false;
-
-                    if (player[H.actor]) {
-                        let eggSize = extract("eggSize")
-                        player[H.actor][H.bodyMesh].scaling = { x: eggSize, y: eggSize, z: eggSize }
-                    };
-
-                    player[H.actor][H.bodyMesh].renderingGroupId = extract("chams") ? 1 : 0;
-
-                    player.exists = objExists;
-                };
-                if (player) {
-                    if (!ss.SETTINGS.safeNames) {
-                    };
-                    if (extract("unfilterNames")) { player.name = (cachedRealData[player.uniqueId]?.name || player.name);
-                    } else player.name = (player?.normalName || player.name);
-                    if (extract("nametags") && player[H.actor] && player[H.actor].nameSprite) { //taken from shellshock.js, so var names are weird
-                        player[H.actor].nameSprite._manager.renderingGroupId = 1;
-                        player[H.actor].nameSprite.renderingGroupId = 1;
-                        var h = Math.length3(player[H.x] - ss.MYPLAYER[H.x], player[H.y] - ss.MYPLAYER[H.y], player[H.z] - ss.MYPLAYER[H.z]),
-                            d = Math.pow(h, 1.25) * 2;
-                        player[H.actor].nameSprite.width = d / 10 + .6;
-                        player[H.actor].nameSprite.height = d / 20 + .3;
-                        ss.MYPLAYER[H.actor].scene.activeCamera.fov = 0.75
-                    };
-                    if (!player.logged) {
-                        player.logged = true;
-                        if (extract("debug")) {
-                            playerLogger.push(player);
-                            log("Logged player: " + player.name, player)
-                        }; //if youre a l33t kiddy who did a search for the term "logger", this does not in fact log any of the user's info. it just keeps track of players who joined and prints them to console.
-                        if (extract("joinMessages") && (!newGame)) {
-                            if (extract("publicBroadcast")) {
-                                sendChatMessage((extract("joinLeaveBranding") ? "[SFC] " : "") + player.name + " joined.")
-                            } else {
-                                processChatItem("joined.", player.name, player.team, "rgba(0, 255, 0, 0.2)");
-                            };
-                        };
-                        onlinePlayersArray.push([player, player.name, player.team]);
-                    };
-                    player.isOnline = objExists;
-                };
-            });
-            playersInGame = onlinePlayersArray.length;
-            for (let i = 0; i < onlinePlayersArray.length; i++) {
-                if (onlinePlayersArray[i][0] && onlinePlayersArray[i][0].isOnline == objExists) { //player still online
-                    onlinePlayersArray[i][2] = onlinePlayersArray[i][0].team;
-                } else {
-                    if (extract("leaveMessages") && (!newGame)) {
-                        if (extract("publicBroadcast")) {
-                            sendChatMessage((extract("joinLeaveBranding") ? "[SFC] " : "") + onlinePlayersArray[i][1] + " left.")
-                        } else {
-                            processChatItem("left.", onlinePlayersArray[i][1], onlinePlayersArray[i][2], "rgba(255, 0, 0, 0.2)");
-                        };
-                    };
-                    onlinePlayersArray.splice(i, 1);
-                };
-            };
-            //update ammoESP boxes, tracer lines, colors
-            if (extract("ammoESP") || extract("ammoTracers") || extract("grenadeESP") || extract("grenadeTracers")) {
-                ss.OBJECTSVAR.getShadowMap()[H.renderList].forEach(item => {
-                    if (item._isEnabled && item.sourceMesh && item.sourceMesh.name && (item.sourceMesh.name == "grenadeItem" || item.sourceMesh.name == "ammo")) { //this is what we want
-                        const itemType = item.sourceMesh.name;
-                        let color = itemType == "ammo" && extract("ammoESPColor") || extract("grenadeESPColor");
-                        color = hexToRgb(color);
-
-                        updateOrCreateLinesESP(item, "ammoESP", color)
-
-                        let willBeVisible = false;
-
-                        if (itemType == "ammo") { //ammo
-                            const regime = extract("ammoESPRegime");
-                            if (regime == "whendepleted" && ammo.store == 0) {
-                                willBeVisible = true;
-                            } else if (regime == "whenlow" && ammo.store <= ammo.capacity) {
-                                willBeVisible = true;
-                            } else if (regime == "belowmax" && ammo.store < ammo.storeMax) {
-                                willBeVisible = true;
-                            } else if (regime == "alwayson") {
-                                willBeVisible = true;
-                            };
-                        } else { //grenades
-                            const regime = extract("grenadeESPRegime");
-                            if (regime == "whendepleted" && ss.MYPLAYER.grenadeCount == 0) {
-                                willBeVisible = true;
-                            } else if (regime == "whenlow" && ss.MYPLAYER.grenadeCount <= 1) {
-                                willBeVisible = true;
-                            } else if (regime == "belowmax" && ss.MYPLAYER.grenadeCount < ss.MYPLAYER.grenadeCapacity) {
-                                willBeVisible = true;
-                            } else if (regime == "alwayson") {
-                                willBeVisible = true;
-                            };
-                        };
-
-                        item.box.visibility = willBeVisible && (itemType == "ammo" && extract("ammoESP") || extract("grenadeESP"));
-                        item.tracerLines.visibility = willBeVisible && (itemType == "ammo" && extract("ammoTracers") || extract("grenadeTracers"));
-
-                        item.exists = objExists;
-                    };
-                });
-            };
-            for (let i = 0; i < ESPArray.length; i++) {
-                if (ESPArray[i][0] && ESPArray[i][0].exists == objExists) { //obj still exists and still relevant
-                    //do nothing, lol
-                } else {
-                    if (ESPArray[i][0]) { //obj still exists but no longer relevant
-                        log('%cRemoving tracer line due to irrelevant object', 'color: white; background: red');
-                        ESPArray[i][0].generatedESP = false;
-                    } else { //obj no longer exists
-                        log('%cRemoving tracer line due to no longer exists', 'color: white; background: red');
-                    };
-                    ESPArray[i][1].dispose(); //tracer
-                    ESPArray[i][2].dispose(); //esp box
-                    if (ESPArray[i][3]) { ESPArray[i][3].dispose() }; //target
-                    if (ESPArray[i][4]) { ESPArray[i][4].dispose() }; //look linetrace forward line
-                    ESPArray.splice(i, 1);
-                };
-            }; newGame = false;
-        };
         createAnonFunction("retrieveFunctions", function (vars, doStateFarm) {
             ss = vars;
 
@@ -5840,17 +5345,7 @@ z-index: 999999;
                 mapStuff();
                 applySkybox();
 
-                let isVisible;
-                const player = currentlyTargeting || playerLookingAt || undefined;
-                if (player && player[H.playing]) {
-                    isVisible = getLineOfSight(player);
-                };
-                highlightCrossHairReticleDot(extract("showLOS") ? isVisible : null);
 
-                if (extract("radar")) {
-                    myPlayerDot.style.display = 'block';
-                    ss.PLAYERS.forEach(player => { updateMiniMap(player, ss.MYPLAYER) });
-                } else {
                     ss.PLAYERS.forEach(player => {
                         if (playerDotsMap.has(player.uniqueId)) {
                             const playerDotToRemove = playerDotsMap.get(player.uniqueId);
@@ -5859,11 +5354,6 @@ z-index: 999999;
                         }
                     });
                     myPlayerDot.style.display = 'none';
-                };
-
-                if (extract("freecam")) {
-                    ss.MYPLAYER[H.actor][H.mesh].position.y = ss.MYPLAYER[H.actor][H.mesh].position.y + 1;
-                };
 
                 //credit to helloworld for the idea (worked it out on my own tho :P)
                 if (ss.MYPLAYER[H.playing]) {
@@ -5899,279 +5389,8 @@ z-index: 999999;
                     ss.MYPLAYER[H.actor].gunContainer.scaling = extract("gunPosition") == "hidden" ? {x: 0, y: 0, z: 0} : {x: 1, y: 1, z: 1};
                 };
 
-                if (extract("spamChat")) {
-                    if (document.getElementById("chatIn").style.visibility == 'visible') {
-                        if (spamDelay < Date.now()) {
-                            if (Date.now() > (lastSpamMessage[0] + extract("spamChatDelay"))) {
-                                let possibleMessages = extract("spamChatText").split("|");
-                                let chosenMessage = possibleMessages[spamMessageCount % possibleMessages.length];
-                                if (chosenMessage == lastSpamMessage[1]) { chosenMessage += String.fromCharCode(97 + Math.floor(Math.random() * 26)) };
-                                sendChatMessage(chosenMessage);
-                                lastSpamMessage = [Date.now(), chosenMessage];
-                                spamMessageCount += 1;
-                            };
-                        } else if (spamDelay < Date.now() - 250) {
-                            spamDelay = Date.now() + 250;
-                        };
-                    };
-                };
                 if (extract("chatHighlight")) {
                     document.getElementById("chatOut").style.userSelect = "text"
-                };
-                if (extract("autoRefill")) {
-                    //log(ss.MYPLAYER.weapon);
-                    if (ammo.rounds == 0) {
-                        ss.MYPLAYER.reload();
-                    } else if (extract("smartRefill")) {
-                        let smartRefillMinAmmo = {
-                            eggk47: 1,
-                            dozenGauge: 0,
-                            csg1: 1,
-                            rpegg: 0,
-                            smg: 1,
-                            m24: 0,
-                            aug: 3,
-                            cluck9mm: 1
-                        };
-                        if (ammo.rounds <= smartRefillMinAmmo[ss.MYPLAYER.weapon.constructor.standardMeshName]) {
-                            ss.MYPLAYER.reload();
-                        };
-                    };
-                };
-                if (extract("autoGrenade") && isVisible && (ss.MYPLAYER.grenadeCount > 0)) {
-                    ss.MYPLAYER.throwGrenade();
-                };
-                if ((extract("autoWeapon") !== "disabled") && (!ss.MYPLAYER[H.playing])) {
-                    weaponArray.random = randomInt(0, 6);
-                    document.querySelectorAll('.weapon_img')[weaponArray[extract("autoWeapon")]].parentNode.click();
-                };
-                if (extract("revealBloom") || extract("showMinAngle")) {
-                    const distCenterToOuter = 2 * (200 / ss.CAMERA.fov);
-                    const bloomValues = predictBloom(ss.MYPLAYER[H.yaw], ss.MYPLAYER[H.pitch]);
-                    // Set the new position of the circle
-                    const centerX = (unsafeWindow.innerWidth / 2);
-                    const centerY = (unsafeWindow.innerHeight / 2);
-                    const offsettedX = centerX + (2 * distCenterToOuter * bloomValues[0]);
-                    const offsettedY = centerY + (2 * distCenterToOuter * bloomValues[1]);
-                    if (extract("revealBloom")) {
-                        redCircle.style.display = '';
-                        redCircle.style.bottom = offsettedY + 'px';
-                        redCircle.style.right = offsettedX + 'px';
-                    } else {
-                        redCircle.style.display = 'none';
-                    };
-                    if (extract("showMinAngle")) {
-                        minangleCircle.style.display = '';
-                        let idkWhatThisIs = 25 * (1.25 / ss.CAMERA.fov);
-                        minangleCircle.style.width = extract("aimbotMinAngle") * idkWhatThisIs + 'px';
-                        minangleCircle.style.height = extract("aimbotMinAngle") * idkWhatThisIs + 'px';
-                        minangleCircle.style.bottom = centerY + 'px';
-                        minangleCircle.style.right = centerX + 'px';
-                    };
-                };
-                if (!extract("showMinAngle")) {
-                    minangleCircle.style.display = 'none';
-                };
-                const playerSlots = document.querySelectorAll('#playerList .playerSlot');
-                playerSlots.forEach(slot => {
-                    const usernameElement = slot.querySelector('.playerSlot--name');
-                    let username = usernameElement ? usernameElement.textContent.trim() : "";
-                    const badgeURLs = Array.from(findBadgesForUsername(username)).reverse();
-                    const existingBadges = slot.querySelectorAll('.badge-image');
-
-                    if (username && badgeURLs && badgeURLs.length > 0 && existingBadges && existingBadges.length < 1) {
-                        existingBadges.forEach(badge => badge.remove());
-                        const eggIcon = !!slot.querySelector('.playerSlot--icons .fas.fa-egg:not(.hidden)');
-                        log(eggIcon, username)
-                        badgeURLs.forEach((badgeURL, index) => {
-                            const badgeImage = document.createElement('img');
-                            badgeImage.src = badgeListURL + badgeURL;
-                            badgeImage.className = 'badge-image';
-                            badgeImage.style.position = 'absolute';
-                            badgeImage.style.height = 'auto';
-                            badgeImage.style.width = 'auto';
-                            badgeImage.style.maxHeight = '100%';
-                            badgeImage.style.maxWidth = '100%';
-                            badgeImage.style.right = `${-13 - index * 8 - (eggIcon ? 10 : 0)}%`;
-                            badgeImage.style.top = '50%';
-                            badgeImage.style.transform = 'translateY(-50%)';
-                            slot.style.position = 'relative';
-                            slot.appendChild(badgeImage);
-                        });
-                    } else if (badgeURLs && badgeURLs.length < 1) {
-                        existingBadges.forEach(badge => badge.remove());
-                    }
-                });
-
-
-                // playerNearest=undefined; //currently unused and not defined
-                // enemyLookingAt=undefined; //currently unused and not defined
-
-                let playerLookingAtMinimum = 999999;
-                playerLookingAt = undefined; //used for player info
-
-                let enemyMinimumDistance = 999999;
-                enemyNearest = undefined; //used for antisneak
-
-                let previousTarget = currentlyTargeting;
-
-                let selectNewTarget = (!extract("antiSwitch") || !currentlyTargeting);
-                if (selectNewTarget) currentlyTargeting = false;
-                let isDoingAimbot = (extract("aimbot") && (extract("aimbotRightClick") ? isRightButtonDown : true) && ss.MYPLAYER[H.playing]);
-                // log(targetingComplete);
-
-                const targetType = extract("aimbotTargetMode");
-                const visibilityMode = extract("aimbotVisibilityMode");
-
-                let enemyMinimumValue = ((targetType == "pointingat") && (extract("silentAimbot"))) ? deg2rad(extract("aimbotMinAngle")) : 10000; //used for selecting target (either pointingat or nearest)
-
-                let didAimbot
-                const candidates = [];
-                let amountVisible = 0;
-
-                ss.PLAYERS.forEach(player => { //iterate over all players to filter out players that we definitely wont target, and also calc some stats for later use
-                    if (player && (player !== ss.MYPLAYER) && player[H.playing] && (player[H.hp] > 0)) {
-                        const whitelisted = (!extract("enableWhitelistAimbot") || extract("enableWhitelistAimbot") && playerMatchesList(whitelistPlayers, player));
-                        const blacklisted = (extract("enableBlacklistAimbot") && playerMatchesList(blacklistPlayers, player));
-                        const passedLists = whitelisted && (!blacklisted);
-                        player.distance = distancePlayers(player);
-                        player.adjustedDistance = distancePlayers(player, 2);
-                        const directionVector = getDirectionVectorFacingTarget(player);
-                        player.angleDiff = getAngularDifference(ss.MYPLAYER, { yawReal: calculateYaw(directionVector), pitchReal: calculatePitch(directionVector) });
-                        player.isVisible = getLineOfSight(player, extract("prediction"));
-
-                        if (player.angleDiff < playerLookingAtMinimum) {
-                            playerLookingAtMinimum = player.angleDiff;
-                            playerLookingAt = player;
-                        };
-
-                        if (passedLists && ((!ss.MYPLAYER.team) || (player.team !== ss.MYPLAYER.team))) { //is an an enemy
-                            if (isDoingAimbot) { //is doing aimbot and we care about getting a new target
-                                if (player.adjustedDistance < enemyMinimumValue) { //for antisneak, not targeting
-                                    enemyMinimumDistance = player.adjustedDistance;
-                                    enemyNearest = player;
-                                };
-                                if (selectNewTarget) {
-                                    candidates.push(player);
-                                    if (player.isVisible) { amountVisible += 1 };
-                                };
-                            };
-                        };
-                    };
-                });
-
-                candidates.forEach(player => {
-                    const valueToUse = ((targetType == "nearest" && player.adjustedDistance) || (targetType == "pointingat" && player.angleDiff));
-                    let visibleValue;
-                    if (visibilityMode == "disabled") { //we dont care about that shit
-                        visibleValue = true; //go ahead
-                    } else if (amountVisible < 1) { //none of candidates are visible
-                        visibleValue = (visibilityMode == "onlyvisible" ? false : true); //there are no visible candidates, so either select none if "onlyvisible" or ignore this altogether
-                    } else { //some are visible
-                        visibleValue = player.isVisible; //assuming now that either "prioritise" or "onlyvisible" are enabled, as "onlyvisible"'s use case fulfilled in previous statement
-                    };
-                    if (visibleValue) {
-                        if (valueToUse < enemyMinimumValue) {
-                            enemyMinimumValue = valueToUse;
-                            currentlyTargeting = player;
-                        };
-                    };
-                });
-
-                if (isDoingAimbot) {
-                    if (currentlyTargeting && currentlyTargeting[H.playing] && currentlyTargeting[H.actor]) { //found a target
-                        didAimbot = true;
-                        if (extract("tracers")) {
-                            currentlyTargeting.tracerLines.color = new L.BABYLON.Color3(...hexToRgb(extract("aimbotColor")));
-                        };
-                        if (extract("playerESP")) {
-                            currentlyTargeting.box.color = new L.BABYLON.Color3(...hexToRgb(extract("aimbotColor")));
-                        };
-                        if ((!extract("silentAimbot")) && (!extract("noWallTrack") || getLineOfSight(player, true)) && (targetingComplete || (deg2rad(extract("aimbotMinAngle")) > currentlyTargeting?.angleDiff))) {
-                            const distanceBetweenPlayers = distancePlayers(currentlyTargeting);
-
-                            const aimbot = getAimbot(currentlyTargeting);
-
-                            const antiSnap = (1 - (extract("aimbotAntiSnap") || 0));
-
-                            if (previousTarget !== currentlyTargeting) { targetingComplete = false };
-
-                            const lerp = function (start, end, alpha) {
-                                let value = (1 - alpha) * start + alpha * end;
-                                if ((Math.abs(end - start) < (0.2 / (distanceBetweenPlayers))) || (targetingComplete)) {
-                                    value = end; targetingComplete = true;
-                                };
-                                return value;
-                            };
-
-                            // Exponential lerp towards the target rotation
-                            ss.MYPLAYER[H.yaw] = setPrecision(lerp(ss.MYPLAYER[H.yaw], aimbot.yawReal, antiSnap));
-                            ss.MYPLAYER[H.pitch] = setPrecision(lerp(ss.MYPLAYER[H.pitch], aimbot.pitchReal, antiSnap));
-                        };
-                        if (enemyMinimumDistance < extract("antiSneak")) {
-                            currentlyTargeting = enemyNearest;
-                            if (ammo.rounds === 0) { //basically after MAGDUMP, switch to pistol, if that is empty reload and keep shootin'
-                                if (ss.MYPLAYER.weaponIdx === 0) { ss.MYPLAYER.swapWeapon(1); }
-                                else { ss.MYPLAYER.reload(); }
-                            };
-                            ss.MYPLAYER.pullTrigger();
-                            // log("ANTISNEAK---->", enemyNearest?.name, enemyMinimumDistance);
-                        };
-                    } else {
-                        if (extract("oneKill")) {
-                            currentlyTargeting = "dead";
-                        } else {
-                            currentlyTargeting = false;
-                        };
-                    };
-                } else {
-                    currentlyTargeting = false;
-                    targetingComplete = false;
-                    if (extract("enableSeizureX")) {
-                        ss.MYPLAYER[H.yaw] += extract("amountSeizureX")
-                    };
-                    if (extract("enableSeizureY")) {
-                        ss.MYPLAYER[H.pitch] += extract("amountSeizureY")
-                    };
-                };
-                highlightTargetOnLeaderboard(currentlyTargeting, (extract("highlightLeaderboard")) ? didAimbot : false);
-                if (extract("upsideDown")) { //sorta useless
-                    if (ss.MYPLAYER[H.pitch] < 1.5 && ss.MYPLAYER[H.pitch] > -1.5) {
-                        ss.MYPLAYER[H.pitch] = Math.PI;
-                    };
-                };
-                if (extract("silentRoll")) {
-                    ss.MYPLAYER[H.pitch] += 2 * Math.PI;
-                };
-                if (extract("enableAutoFire")) {
-                    let autoFireType = extract("autoFireType");
-                    let doAutoFire = false
-                    if (autoFireType == "always") {
-                        doAutoFire = true;
-                    } else if (autoFireType == "whileAimbot" && didAimbot) {
-                        doAutoFire = true;
-                    } else if (autoFireType == "whileVisible" && isVisible) {
-                        doAutoFire = true;
-                    } else if (autoFireType == "whileVisAimbot" && isVisible && didAimbot) {
-                        doAutoFire = true;
-                    };
-                    if (doAutoFire) {
-                        if ((ammo.rounds > 0) || (ammo.store > 0)) {
-                            ss.MYPLAYER.pullTrigger();
-                        } else {
-                            ss.MYPLAYER.melee();
-                        };
-                    };
-                    //method by de_Neuublue
-                    if (autoFireType == "forceAutomatic") {
-                        if (ss.MYPLAYER.weapon.constructor.originallySemi == null) {
-                            ss.MYPLAYER.weapon.constructor.originallySemi = !ss.MYPLAYER.weapon.constructor.automatic;
-                        };
-                        ss.MYPLAYER.weapon.constructor.automatic = true;
-                    } else if (ss.MYPLAYER.weapon.constructor.originallySemi) {
-                        ss.MYPLAYER.weapon.constructor.originallySemi = null;
-                        ss.MYPLAYER.weapon.constructor.automatic = false;
-                    };
                 };
 
 

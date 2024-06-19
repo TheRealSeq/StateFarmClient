@@ -254,8 +254,8 @@ let attemptedInjection = false;
     const tp = {}; // <-- tp = tweakpane
     // blank variables
     let ss = {};
-    let msgElement, botBlacklist, initialisedCustomSFX, automatedBorder, clientID, didStateFarm, menuInitiated, GAMECODE, noPointerPause, resetModules, amountOnline, errorString, playersInGame, loggedGameMap, startUpComplete, isBanned, attemptedAutoUnban, coordElement, gameInfoElement, playerinfoElement, playerstatsElement, firstUseElement, minangleCircle, redCircle, crosshairsPosition, currentlyTargeting, ammo, ranOneTime, lastWeaponBox, lastChatItemLength, configMain, configBots, playerLogger;
-    let whitelistPlayers, scrambledMsgEl, accountStatus, badgeList, annoyancesRemoved, oldGa, newGame, previousDetail, previousLegacyModels, previousTitleAnimation, blacklistPlayers, playerLookingAt, forceControlKeys, forceControlKeysCache, playerNearest, enemyLookingAt, enemyNearest, AUTOMATED, ranEverySecond
+    let msgElement, botBlacklist, initialisedCustomSFX, automatedBorder, clientID, didStateFarm, menuInitiated, GAMECODE, noPointerPause, resetModules, amountOnline, errorString, playersInGame, loggedGameMap, startUpComplete, isBanned, attemptedAutoUnban, coordElement, gameInfoElement, firstUseElement, crosshairsPosition, currentlyTargeting, ammo, ranOneTime, lastWeaponBox, lastChatItemLength, configMain, configBots, playerLogger;
+    let whitelistPlayers, scrambledMsgEl, accountStatus, badgeList, annoyancesRemoved, oldGa, newGame, previousDetail, previousLegacyModels, previousTitleAnimation, blacklistPlayers, playerLookingAt, forceControlKeys, forceControlKeysCache, AUTOMATED, ranEverySecond
     let cachedCommand = "", cachedCommandTime = Date.now();
     let activePath, findNewPath, activeNodeTarget;
     let pathfindingTargetOverride = undefined;
@@ -659,12 +659,6 @@ let attemptedInjection = false;
                 title: "WIP", content:
 `Sorry! No guide yet!`},
         ]);
-            initModule({ location: tp.renderTab.pages[0], title: "show look dir", storeAs: "lookTracers", bindLocation: tp.renderTab.pages[1], });
-            initFolder({ location: tp.renderTab.pages[0], title: "look direction options", storeAs: "lookTracersFolder", });
-                initModule({ location: tp.lookTracersFolder, title: "render above", storeAs: "lookTracersRGI1", bindLocation: tp.renderTab.pages[1], });
-                //initModule({ location: tp.lookTracersFolder, title: "length", storeAs: "lookTracersLength", slider: { min: 0, max: 100, step: 0.25 }, defaultValue: 75, });
-                initModule({ location: tp.lookTracersFolder, title: "color", storeAs: "lookTracersColor", defaultValue: "#00ffff", });
-            tp.renderTab.pages[0].addSeparator();
             initModule({ location: tp.renderTab.pages[0], title: "FOV", storeAs: "fov", slider: { min: 0, max: 360, step: 3 }, defaultValue: 72, });
             initModule({ location: tp.renderTab.pages[0], title: "Zoom FOV", storeAs: "zoom", slider: { min: 0, max: 72, step: 1 }, defaultValue: 15, bindLocation: tp.renderTab.pages[1], defaultBind: "C", });
             tp.renderTab.pages[0].addSeparator();
@@ -688,15 +682,7 @@ let attemptedInjection = false;
                 title: "WIP", content:
 `Sorry! No guide yet!`},
         ]);
-            initModule({ location: tp.hudTab.pages[0], title: "Show Bloom", storeAs: "revealBloom", bindLocation: tp.hudTab.pages[1], });
-            initModule({ location: tp.hudTab.pages[0], title: "Show LOS", storeAs: "showLOS", bindLocation: tp.hudTab.pages[1], });
-            initModule({ location: tp.hudTab.pages[0], title: "Show MinAngle", storeAs: "showMinAngle", bindLocation: tp.hudTab.pages[1], });
-            initModule({ showConditions: [["disabledlmao", true]], location: tp.hudTab.pages[0], title: "Leaderboard", storeAs: "highlightLeaderboard", bindLocation: tp.hudTab.pages[1], });
-            tp.hudTab.pages[0].addSeparator();
             initModule({ location: tp.hudTab.pages[0], title: "Co-ords", storeAs: "showCoordinates", bindLocation: tp.hudTab.pages[1], });
-            initModule({ location: tp.hudTab.pages[0], title: "RadarWIP", storeAs: "radar", bindLocation: tp.hudTab.pages[1], });
-            initModule({ location: tp.hudTab.pages[0], title: "HP Display", storeAs: "playerStats", bindLocation: tp.hudTab.pages[1], });
-            initModule({ location: tp.hudTab.pages[0], title: "PlayerInfo", storeAs: "playerInfo", bindLocation: tp.hudTab.pages[1], });
             initModule({ location: tp.hudTab.pages[0], title: "GameInfo", storeAs: "gameInfo", bindLocation: tp.hudTab.pages[1], });
             initModule({ location: tp.hudTab.pages[0], title: "ShowStream", storeAs: "showStreams", bindLocation: tp.hudTab.pages[1], });
         //CHAT MODULES
@@ -1827,47 +1813,7 @@ debug mode).`},
         document.body.appendChild(gameInfoElement);
         gameInfoElement.style.display = 'none';
         //initiate hp div and css and shit
-        playerstatsElement = document.createElement('div'); // create the element directly
-        playerstatsElement.classList.add('playerstats');
-        playerstatsElement.setAttribute('style', `
-            position: absolute;
-            top: 20px;
-            left: 280px;
-            height: auto;
-            min-height: 30px;
-            text-wrap: nowrap;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.6);
-            font-weight: bolder;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            z-index: 999999;
-        `);
-        document.body.appendChild(playerstatsElement);
-        playerstatsElement.style.display = 'none';
         //initiate player info div and css and shit
-        playerinfoElement = document.createElement('div'); // create the element directly
-        playerinfoElement.classList.add('playerinfo');
-        playerinfoElement.setAttribute('style', `
-            position: absolute;
-            top: 80%;
-            left: 90%;
-            height: auto;
-            max-height: 102;
-            text-wrap: nowrap;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.6);
-            font-weight: bolder;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            z-index: 999999;
-        `);
-        document.body.appendChild(playerinfoElement);
-        playerinfoElement.style.display = 'none';
         //initiate first use div and css and shit
         firstUseElement = document.createElement('div'); // create the element directly
         firstUseElement.classList.add('firstuse');
@@ -1886,41 +1832,20 @@ debug mode).`},
         document.body.appendChild(firstUseElement);
         firstUseElement.style.display = 'none';
         //initiate bloom indicator div and css and shit
-        redCircle = document.createElement('div');
-        redCircle.style.position = 'fixed';
-        redCircle.style.width = '5px';
-        redCircle.style.height = '5px';
-        redCircle.style.borderRadius = '50%';
-        redCircle.style.backgroundColor = 'red';
-        redCircle.style.transform = 'translate(-50%, -50%)';
-        document.body.appendChild(redCircle);
         //initiate minangle indicator div and css and shit
-        minangleCircle = document.createElement('div');
-        minangleCircle.style.position = 'fixed';
-        minangleCircle.style.borderRadius = '100%';
-        minangleCircle.style.border = 'thin solid red'
-        minangleCircle.style.transform = 'translate(50%, 50%)';
-        minangleCircle.style.pointerEvents = 'none';
-        document.body.appendChild(minangleCircle);
 
         if (load("HUD-Positions") == null) {
             hudElementPositions.coordElement = { top: coordElement.getBoundingClientRect().top, left: coordElement.getBoundingClientRect().left };
             hudElementPositions.gameInfoElement = { top: gameInfoElement.getBoundingClientRect().top, left: gameInfoElement.getBoundingClientRect().left };
-            hudElementPositions.playerstatsElement = { top: playerstatsElement.getBoundingClientRect().top, left: playerstatsElement.getBoundingClientRect().left };
-            hudElementPositions.playerinfoElement = { top: playerinfoElement.getBoundingClientRect().top, left: playerinfoElement.getBoundingClientRect().left };
             save("HUD-Positions", hudElementPositions);
         } else {
             hudElementPositions = load("HUD-Positions");
 
             coordElement.style.top = hudElementPositions.coordElement.top + "px";
             gameInfoElement.style.top = hudElementPositions.gameInfoElement.top + "px";
-            playerstatsElement.style.top = hudElementPositions.playerstatsElement.top + "px";
-            playerinfoElement.style.top = hudElementPositions.playerinfoElement.top + "px";
 
             coordElement.style.left = hudElementPositions.coordElement.left + "px";
             gameInfoElement.style.left = hudElementPositions.gameInfoElement.left + "px";
-            playerstatsElement.style.left = hudElementPositions.playerstatsElement.left + "px";
-            playerinfoElement.style.left = hudElementPositions.playerinfoElement.left + "px";
         };
     };
 
@@ -1973,8 +1898,6 @@ debug mode).`},
                     //saves new positions
                     hudElementPositions.coordElement = { "top": coordElement.getBoundingClientRect().top, "left": coordElement.getBoundingClientRect().left };
                     hudElementPositions.gameInfoElement = { "top": gameInfoElement.getBoundingClientRect().top, "left": gameInfoElement.getBoundingClientRect().left };
-                    hudElementPositions.playerstatsElement = { "top": playerstatsElement.getBoundingClientRect().top, "left": playerstatsElement.getBoundingClientRect().left };
-                    hudElementPositions.playerinfoElement = { "top": playerinfoElement.getBoundingClientRect().top, "left": playerinfoElement.getBoundingClientRect().left };
                     save("HUD-Positions", hudElementPositions);
                 };
 
@@ -2553,26 +2476,18 @@ z-index: 999999;
     const processChatItem = function (text, playerName, playerTeam, highlightColor) {
         let chatItem = document.createElement("div");
         let playerNameSpan = document.createElement("span");
-        let playerInfoContainer = document.createElement("div");
         let serverIcon = document.createElement("i");
 
         chatItem.classList.add("chat-item");
-        playerInfoContainer.style.display = "inline-block";
 
         playerNameSpan.classList.add("chat-player-name", "ss_marginright_xs");
         playerNameSpan.textContent = playerName + " ";
-
-        playerInfoContainer.style.color = TEAMCOLORS[playerTeam];
-        playerInfoContainer.appendChild(serverIcon);
-        playerInfoContainer.appendChild(playerNameSpan);
 
         let messageSpan = document.createElement("span");
         messageSpan.innerHTML = text;
         chatItem.style.fontStyle = "italic";
         messageSpan.style.backgroundColor = highlightColor;
-        playerInfoContainer.style.backgroundColor = highlightColor;
 
-        chatItem.appendChild(playerInfoContainer);
         chatItem.appendChild(messageSpan);
 
         document.getElementById("chatOut").appendChild(chatItem);
@@ -2737,14 +2652,9 @@ z-index: 999999;
 
         coordElement.style.display = "none";
         gameInfoElement.style.display = "none";
-        playerstatsElement.style.display = "none";
-        playerinfoElement.style.display = "none";
-        redCircle.style.display = "none";
         firstUseElement.style.display = "none";
         makeHudElementDragable(coordElement);
         makeHudElementDragable(gameInfoElement);
-        makeHudElementDragable(playerstatsElement);
-        makeHudElementDragable(playerinfoElement);
         if (extract("gameBlacklistCodes") != "" && extract("gameBlacklistCodes") != undefined) {
             let input = extract("gameBlacklistCodes");
             input = input.split(",");
@@ -3184,32 +3094,6 @@ z-index: 999999;
 
         if (ss && ss.MYPLAYER && unsafeWindow.extern.inGame) {
             //innertext stuff, fairly resource intensive. disable these for performance
-            if (extract("playerStats")) {
-                let playerStates = "";
-                ss.PLAYERS.forEach(player => {
-                    if (player && (player !== ss.MYPLAYER) && (player[H.hp] > 0) && ((!ss.MYPLAYER.team) || (player.team !== ss.MYPLAYER.team))) {
-                        playerStates = playerStates + player.name + ": " + Math.round(player[H.hp]) + " HP\n";
-                    };
-                });
-                if (playerStates == "") { playerStates = "No Enemy Players" };
-                playerstatsElement.innerText = playerStates;
-                void playerstatsElement.offsetWidth;
-                playerstatsElement.style.display = '';
-            };
-            if (extract("playerInfo")) {
-                let playerInfoString = "";
-                const player = currentlyTargeting || playerLookingAt || undefined
-                if (player && player.distance && player[H.playing]) {
-                    playerInfoString = playerInfoString + player.name + "\n"
-                    playerInfoString = playerInfoString + "HP: " + Math.round(player[H.hp]) + "\n"
-                    playerInfoString = playerInfoString + "Distance: " + player.distance.toFixed(3) + "\n"
-                    playerInfoString = playerInfoString + "AngleDiff: " + player.angleDiff.toFixed(3) + "\n"
-                };
-                if (playerInfoString == "") { playerInfoString = "Not Looking At Player" };
-                playerinfoElement.innerText = playerInfoString;
-                void playerinfoElement.offsetWidth;
-                playerinfoElement.style.display = '';
-            };
             if (ss.MYPLAYER && ss.MYPLAYER[H.actor] && ss.MYPLAYER[H.actor][H.mesh] && extract("showCoordinates")) {
                 const fonx = Number((ss.MYPLAYER[H.actor][H.mesh].position.x).toFixed(3));
                 const fony = Number((ss.MYPLAYER[H.actor][H.mesh].position.y).toFixed(3));
@@ -4233,8 +4117,6 @@ z-index: 999999;
             modifyJS(`${f(H.CULL)})r`, `${functionNames.shouldNotCull}())r`);
             log('%cSuccess! Cull inhibition hooked ' + f(H.CULL), 'color: green; font-weight: bold;');
             log('%cSTATEFARM INJECTION STAGE 4: INJECT OTHER FUNCTIONS', 'color: yellow; font-weight: bold; font-size: 1.2em; text-decoration: underline;');
-            //hook for modifications just before firing
-            modifyJS('fire(){var', 'fire(){window.' + functionNames.beforeFiring + '(this.player);var');
             //hook for fov mods
             modifyJS(/\.fov\s*=\s*1\.25/g, '.fov = window.' + functionNames.fixCamera + '()');
             modifyJS(/\.fov\s*\+\s*\(1\.25/g, '.fov + (window.' + functionNames.fixCamera + '()');
@@ -5341,7 +5223,6 @@ z-index: 999999;
                 oneTime();
             } else if (typeof (L.BABYLON) !== 'undefined') {
                 initVars();
-                updateLinesESP();
                 mapStuff();
                 applySkybox();
 

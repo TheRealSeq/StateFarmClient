@@ -1,7 +1,6 @@
 // ==UserScript==
-// @name         Shell Shockers Aimbot & ESP: StateFarm Client V3 - Cheats For Bloom, Chat, Botting, Unbanning & More
-// @description  Fixed for 0.48.1! Advanced, Open Source, No Ads. Best cheats menu for Shell Shockers in 2024. Many modules such as Aimbot, PlayerESP, AmmoESP, Chams, Nametags, Join/Leave messages, Chat Filter Disabling, AntiAFK, FOV Slider, Zooming, Co-ords, Player Stats, Auto Refill and many more whilst having unsurpassed customisation options such as binding to any key, easily editable colour scheme and themes - all on the fly!
-// @author       Hydroflame521, onlypuppy7, enbyte, notfood, 1ust, OakSwingZZZ, Seq and de_Neuublue
+// @name         ShellFarm (upd)
+// @description  Fixed for 0.48.1! Advanced, Open Source, No Ads. Best mod menu for Shell Shockers in 2024.
 // @namespace    http://github.com/Hydroflame522/StateFarmClient/
 // @supportURL   http://github.com/Hydroflame522/StateFarmClient/issues/
 // @license      GPL-3.0
@@ -1592,7 +1591,7 @@ debug mode).`},
                         });
                     };
                 } catch (error) {
-                    
+
                 }
             };
         };
@@ -2609,7 +2608,7 @@ z-index: 999999;
         };
         return found;
     };
-    
+
     const playAudio = function (name, panner, contextName) {
         contextName = findStringInLists(divertContexts, name) || "OTHER"+randomInt(1,9)
         let audioContext;
@@ -2787,7 +2786,7 @@ z-index: 999999;
             ESPArray.push([object, tracerLines, box, target, object.lookDirLine]);
         };
         if(object.lookDirLine && extract("lookTracers")){ //no need to update if module disabled. Raycasts aren't the best thing to run every frame without any use...
-            const TRACE_LENGTH_MULTIPLIER = 75; //how long is the trace max? 
+            const TRACE_LENGTH_MULTIPLIER = 75; //how long is the trace max?
             const playerEye = object[H.actor].eye; // BABYLON.TransformNode (https://doc.babylonjs.com/typedoc/classes/BABYLON.TransformNode). TN of the "eye", as shell calls it. Basically camera pos.
 
             let conclusion /*:trol:*/ = playerEye.forward.clone(); // BABYLON.Vector3 (https://doc.babylonjs.com/typedoc/classes/BABYLON.Vector3). this vector is NORMALIZED
@@ -2795,15 +2794,15 @@ z-index: 999999;
             conclusion= conclusion.add(playerEye.absolutePosition); //add pos so we are relative to eye
 
             //RAYCAST
-            const rayToGround = ss.RAYS[H.rayCollidesWithMap](object[H.actor].eye.absolutePosition, conclusion, ss.RAYS.grenadeCollidesWithCell); //does player look at object, if yes, where? 
+            const rayToGround = ss.RAYS[H.rayCollidesWithMap](object[H.actor].eye.absolutePosition, conclusion, ss.RAYS.grenadeCollidesWithCell); //does player look at object, if yes, where?
             const g = playerEye.absolutePosition; //easier acess
             if(rayToGround){
-                object.lookDirLine.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [g.x, g.y, g.z, rayToGround.pick.pickedPoint.x, rayToGround.pick.pickedPoint.y, rayToGround.pick.pickedPoint.z]); 
+                object.lookDirLine.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [g.x, g.y, g.z, rayToGround.pick.pickedPoint.x, rayToGround.pick.pickedPoint.y, rayToGround.pick.pickedPoint.z]);
                 //set line to correct points, with the map collision as endpoint
             }
             if(!rayToGround){
                 const f = conclusion;//easier acess
-                object.lookDirLine.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [g.x, g.y, g.z, f.x, f.y, f.z]); 
+                object.lookDirLine.setVerticesData(L.BABYLON.VertexBuffer.PositionKind, [g.x, g.y, g.z, f.x, f.y, f.z]);
                 //set line to correct points, with the max dist scaled dirVec3 as endpoint
             }
 
@@ -5887,7 +5886,7 @@ z-index: 999999;
                     ss.MYPLAYER[H.actor].hands.material.alpha = ((extract("perspective") !== "firstPerson") && extract("perspectiveAlpha")) ? .5 : 1;
                     ss.MYPLAYER[H.actor][H.bodyMesh].material.alpha = ((extract("perspective") !== "firstPerson") && extract("perspectiveAlpha")) ? .5 : 1;
                 };
-                
+
                 let filter = typeof(extract("filter")) == 'number' ? extract("filter") : 2;
                 if (ss.SCENE && ss.SCENE.appliedFilter !== filter) {
                     ss.SCENE.materials.forEach(material => {
@@ -5979,7 +5978,7 @@ z-index: 999999;
                     let username = usernameElement ? usernameElement.textContent.trim() : "";
                     const badgeURLs = Array.from(findBadgesForUsername(username)).reverse();
                     const existingBadges = slot.querySelectorAll('.badge-image');
-                    
+
                     if (username && badgeURLs && badgeURLs.length > 0 && existingBadges && existingBadges.length < 1) {
                         existingBadges.forEach(badge => badge.remove());
                         const eggIcon = !!slot.querySelector('.playerSlot--icons .fas.fa-egg:not(.hidden)');

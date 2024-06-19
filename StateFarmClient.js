@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         ShellFarm (upd)
+// @name         (S)HellFarm (upd)
 // @description  Fixed for 0.48.1! Advanced, Open Source, No Ads. Best mod menu for Shell Shockers in 2024.
 // @namespace    http://github.com/Hydroflame522/StateFarmClient/
 // @supportURL   http://github.com/Hydroflame522/StateFarmClient/issues/
